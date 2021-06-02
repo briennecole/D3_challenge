@@ -29,5 +29,11 @@ const svg = d3
   // Step 3:
 // Import data from the data.csv file
 // =================================
-d3.csv("assests/data/data.csv").then(censusData => {
-    // Step 4: Parse the data
+d3.csv("data/data.csv").then(censusData => {
+    // Step 4: Parse the data/cast as numbers
+    censusData.forEach(data => {
+        data.smokes = +data.smokes;
+        data.poverty = +data.poverty;
+      });
+      console.log(censusData)
+});
