@@ -39,11 +39,11 @@ d3.csv("assets/data/data.csv").then(censusData => {
       // Create scale functions
     // ==============================
     const xLinearScale = d3.scaleLinear()
-    .domain([20, d3.max(censusData, d => d.smokes)])
+    .domain([9, d3.max(censusData, d => d.smokes)])
     .range([0, width]);
 
     const yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(censusData, d => d.poverty)])
+    .domain([7, d3.max(censusData, d => d.poverty)])
     .range([height, 0]);
 
     // Create axis functions
@@ -71,12 +71,23 @@ d3.csv("assets/data/data.csv").then(censusData => {
     .attr("fill", "red")
     .attr("opacity", 0.5)
     .attr("stroke", "black")
-    .attr("stroke-width", 1);
+    .attr("stroke-width", 2);
+
+    // Add Circle Labels
+    const circlesLabels = chartGroup.selectAll("labels")
+    .data(censusData)
+    .enter()
+    .append("text")
+    .attr("dx", d => xLinearScale(d.smokes))
+    .attr("dy", d => yLinearScale(d.poverty))
+    .attr("text-anchor", "middle")
+    .attr("font-weight", "500")
+    .text(d => d.abbr);
 
     const toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
-    .html(d => `${d.census}<br>Poverty Rate: ${d.poverty}<br>Smokers: ${d.smokes}`);
+    .html(d => `${d.state}<br>Poverty Rate: ${d.poverty}<br>Smokers: ${d.smokes}`);
 
     // Step 7: Create tooltip in the chart
     // ==============================
@@ -96,14 +107,14 @@ d3.csv("assets/data/data.csv").then(censusData => {
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
+      .attr("y", -5 - margin.left)
+      .attr("x", 0 - (height / 1.2))
       .attr("dy", "1em")
       .attr("class", "axisText")
       .text("Percent of Population who Live in Poverty");
       
     chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("transform", `translate(${width / 4}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Percent of Population who Smoke");
   }).catch(error => console.log(error));
