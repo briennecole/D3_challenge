@@ -6,7 +6,9 @@ Using the D3 techniques we learned in class, create a scatter plot that represen
 
 An image of my final graph and link to the github.io page are below.
 
+https://briennecole.github.io/D3_challenge/
+
 
 <img width="1017" alt="Screen Shot 2021-06-04 at 6 40 35 PM" src="https://user-images.githubusercontent.com/75045133/120877248-564ca180-c56a-11eb-9e9e-942dbca04788.png">
 
-https://briennecole.github.io/D3_challenge/
+
